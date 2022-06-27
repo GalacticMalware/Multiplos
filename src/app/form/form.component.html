@@ -1,0 +1,29 @@
+<form [formGroup]="numberForm" novalidate>
+  <div class="div-content">
+    <ion-item class="ion-no-padding">
+      <ion-icon style="margin-left: 15px" slot="start" name="person"></ion-icon>
+      <ion-input
+        placeholder="Ingrese un número"
+        formControlName="numberUser"
+        autocapitalize
+        inputmode="email"
+      ></ion-input>
+    </ion-item>
+  </div>
+
+  <div *ngFor="let error of errorMessages.numberUser">
+    <ng-container
+      *ngIf="
+        numberForm.get('numberUser').hasError(error.type) &&
+        (numberForm.get('numberUser').dirty || numberForm.get('numberUser').touched)
+      "
+    >
+      <small style="font-size: 16px" class="error-message">* {{ error.message }}</small>
+    </ng-container>
+  </div>
+
+  <ion-button type="submit" [disabled]="numberForm.invalid">
+    <ion-icon slot="start" name="search-outline"></ion-icon>
+    Buscar multiplos
+  </ion-button>
+</form>

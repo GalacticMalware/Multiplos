@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title><span translate>Multiplos</span></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card class="ion-text-center">
+    <img
+      class="logo"
+      src="https://cdn-icons.flaticon.com/png/512/4002/premium/4002516.png?token=exp=1656195586~hmac=c9600e15bfd57c90e700413cfd843ec6"
+      alt="angular logo"
+    />
+    <ion-card-content>
+      <ion-card-title>
+        <form [formGroup]="numberForm" novalidate (ngSubmit)="saveData()">
+          <div class="div-content">
+            <ion-item class="ion-no-padding">
+              <ion-icon style="margin-left: 15px" slot="start" name="person"></ion-icon>
+              <ion-input
+                placeholder="Ingrese un número"
+                formControlName="numberUser"
+                autocapitalize
+                inputmode="email"
+              ></ion-input>
+            </ion-item>
+          </div>
+
+          <div *ngFor="let error of errorMessages.numberUser">
+            <ng-container
+              *ngIf="
+                numberForm.get('numberUser').hasError(error.type) &&
+                (numberForm.get('numberUser').dirty || numberForm.get('numberUser').touched)
+              "
+            >
+              <small style="font-size: 16px" class="error-message">* {{ error.message }}</small>
+            </ng-container>
+          </div>
+
+          <ion-button type="submit" [disabled]="numberForm.invalid">
+            <ion-icon slot="start" name="search-outline"></ion-icon>
+            Buscar multiplos
+          </ion-button>
+        </form>
+
+        <p>Resultados anteriores:</p>
+        <ion-row class="row-data">
+          <div *ngFor="let number of historyData; index as i">
+            <ion-button (click)="backData(i)" [color]="number.color">{{ number.number }}</ion-button>
+          </div>
+        </ion-row>
+
+        <ion-row class="row-data">
+          <ion-label>[</ion-label>
+          <div *ngFor="let number of data">
+            <ion-label [color]="number.color">{{ number.number }}</ion-label>
+            <br />
+            <!--<ion-label [color]="number.color">{{ number.auxNumber }}</ion-label>-->
+          </div>
+          <ion-label>]</ion-label>
+        </ion-row>
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fir-73517": {
+      "hosting": {
+        "multiplos": [
+          "fir-73517"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fir-73517"
+  }
+}
